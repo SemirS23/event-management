@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+  <h1 class="title">ETicket <br> Event Management</h1>
+  <div class="login">
+      <h1>Login</h1>
+      <form method="POST" action="">
+          {% csrf_token %}
+        <div >
+          <input class="input-box" type="text" name="username" id="username" placeholder="Username or Email" value="">
+        </div>
+        <div>
+          <input class="input-box" type="password" name="password" id="password" placeholder="Password" value="" >
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
+        <div class="text">
+          <h3>Need an account? <a href="{% url 'users:register' %}">Sign up now</a></h3>
+        </div>
+      </form>
+  </div>
+  <div id="error-message">
+    {% if messages %}
+
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+    {% endif %}
+  </div>
+</body>
+</html>

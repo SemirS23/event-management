@@ -1,0 +1,20 @@
+{% extends 'eticket/base.html' %}
+{% load static %}
+
+{% block title %}ELearn{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="center-wrapper">
+        <h1 class="title">Event Management Done Different</h1>
+        <div class="buttons">
+            <a href="">Buy Tickets</a>
+            <a href="">Host Event</a>
+            <a href="">Add Venue</a>
+        </div>
+    </div>
+    <div id="background"></div>
+{% endblock %}
