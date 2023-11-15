@@ -1,7 +1,7 @@
 {% extends 'eticket/base.html' %}
 {% load static %}
 
-{% block title %}ELearn{% endblock %}
+{% block title %}ETicket{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -13,7 +13,7 @@
         <div class="buttons">
             <a href="">Buy Tickets</a>
             <a href="">Host Event</a>
-            <a href="">Add Venue</a>
+            <a href="{% url 'eticket:venue' %}">Add Venue</a>
         </div>
     </div>
     <div id="background"></div>

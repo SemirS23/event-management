@@ -1,0 +1,53 @@
+{% extends 'eticket/base.html' %}
+{% load static %}
+
+{% block title %}ETicket{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/venue.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="addbtn"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="white" d="M6.5 1.75a.75.75 0 0 0-1.5 0V5H1.75a.75.75 0 0 0 0 1.5H5v3.25a.75.75 0 0 0 1.5 0V6.5h3.25a.75.75 0 0 0 0-1.5H6.5V1.75Z"/></svg></div>
+<div id="hidden-wrapper">
+    <div class="form-wrapper">
+        <form action="" method="POST" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <label for="name" class="textarea-label"> Venue</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Venue name"
+                class="textarea-input"
+            />
+            <input
+                type="text"
+                name="location"
+                id="location"
+                placeholder="Address"
+                class="textarea-input"
+            />
+            <div class="form-group">
+                <label for="capacity">Capacity:</label>
+                <input type="number" id="capacity" name="capacity" min="1" value="0" />
+            </div>
+    
+            <button class="btn">
+                Add Venue
+            </button>
+        </form>
+    </div>
+</div>
+<div class="venue-wrapper" id="venue-wrapper">
+    {% for venue in venues %}
+        <div class="venue">
+            <span>Venue name: {{venue.name}}</span>
+            <span>Owner: {{venue.owner}}</span>
+            <span>Address: {{venue.location}}</span>
+            <span>Capacity: {{venue.capacity}}</span>
+        </div>
+    {% endfor %}
+</div>
+<script src="{% static 'js/venue.js' %}"></script>
+{% endblock %}
