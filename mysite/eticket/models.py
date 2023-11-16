@@ -4,11 +4,6 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
-class Event(models.Model):
-    eventID = models.IntegerField(primary_key=True),
-    eventName = models.CharField(max_length=50),
-    host = models.CharField(max_length=50)
-
 class Ticket(models.Model):
     ticketID = models.IntegerField(primary_key=True),
     row = models.SmallIntegerField(),
@@ -21,3 +16,9 @@ class Venue(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     capacity = models.PositiveIntegerField(default=0)
+
+class Event(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    eventName = models.CharField(max_length=50, default="")
+    host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, null=True)

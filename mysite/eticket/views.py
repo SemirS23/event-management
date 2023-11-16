@@ -25,15 +25,18 @@ def venue(request):
 
 def hostEvent(request):
     events = Event.objects.all()
+    venues = Venue.objects.all()
     if request.method == 'POST':
         event_name = request.POST.get('eventName')
-        host = request.POST.get('host')
+        venue_id = request.POST.get('venue')
+        venue = Venue.objects.get(pk=venue_id)
         Event.objects.create(
             eventName=event_name,
-            host=host            
+            host=request.user,
+            venue=venue           
         )
         return redirect('eticket:event')
-    context = {'events':events}
+    context = {'events':events, 'venues':venues}
     return render(request, "eticket/hostEvent.html", context)
 
 

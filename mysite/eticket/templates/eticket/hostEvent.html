@@ -21,13 +21,11 @@
                 placeholder="Name of Event"
                 class="textarea-input"
             />
-            <input
-                type="text"
-                name="host"
-                id="host"
-                placeholder="Host"
-                class="textarea-input"
-            />
+            <select name="venue" id="venue">
+                {% for venue in venues %}
+                    <option value="{{ venue.id }}">{{ venue.name }}</option>
+                {% endfor %}
+            </select>
     
             <button class="btn">
                 Add Event
