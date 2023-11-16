@@ -6,4 +6,5 @@ app_name = 'eticket'
 urlpatterns = [
     path("", views.home, name="home"),
     path("venue/", views.venue, name="venue"),
+    path("event/", views.hostEvent, name="event"),
 ]   
