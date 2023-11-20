@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Venue, Event
+from .models import Venue, Event, Ticket
 
 # Create your views here.
 def home(request):
@@ -30,14 +30,33 @@ def hostEvent(request):
         event_name = request.POST.get('eventName')
         venue_id = request.POST.get('venue')
         venue = Venue.objects.get(pk=venue_id)
+        price = request.POST.get('ticketPrice')
         Event.objects.create(
             eventName=event_name,
             host=request.user,
-            venue=venue           
+            venue=venue,
+            ticketPrice = price
         )
         return redirect('eticket:event')
     context = {'events':events, 'venues':venues}
     return render(request, "eticket/hostEvent.html", context)
 
-
+def buyTickets(request):
+    tickets = Ticket.objects.all()
+    events = Event.objects.all()
+    if request.method == 'POST':
+        row = request.POST.get('row')
+        seat_num = request.POST.get('seatNum')
+        event_id = request.POST.get('event')
+        event = Event.objects.get(pk=event_id)
+        ticketPrice = request.POST.get('ticketPrice')
+        Ticket.objects.create(
+            row=row, 
+            seatNum = seat_num,
+            ticketPrice = ticketPrice,
+            event=event
+        )
+        return redirect('eticket:ticket')
+    context = {'tickets':tickets, 'events':events}
+    return render(request, "eticket/buyTicket.html", context)
 

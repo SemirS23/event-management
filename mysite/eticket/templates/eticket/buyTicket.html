@@ -1,0 +1,63 @@
+{% extends 'eticket/base.html' %}
+{% load static %}
+
+{% block title %}ETicket{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/venue.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="addbtn"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="white" d="M6.5 1.75a.75.75 0 0 0-1.5 0V5H1.75a.75.75 0 0 0 0 1.5H5v3.25a.75.75 0 0 0 1.5 0V6.5h3.25a.75.75 0 0 0 0-1.5H6.5V1.75Z"/></svg></div>
+<div id="hidden-wrapper">
+    <div class="form-wrapper">
+        <form action="" method="POST" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <label for="name" class="textarea-label">Ticket</label>
+
+            <select name="event" id="event" placeholder="Select Event">
+                {% for event in events %}
+                    <option value="{{ event.id }}">{{ event.eventName }}</option>
+                {% endfor %}
+            </select>
+                
+            <input
+                type="number"
+                name="row"
+                id="row"
+                placeholder="Row Number"
+                class="textarea-input"
+            />
+            <input
+                type="number"
+                name="seatNum"
+                id="seatNum"
+                placeholder="Seat Number"
+                class="textarea-input"
+            />
+
+            <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                placeholder="Ticket Quantity"
+                class="textarea-input"
+            />
+            <button class="btn">
+                Buy Tickets
+            </button>
+        </form>
+    </div>
+</div>
+<div class="ticket-wrapper" id="ticket-wrapper">
+    {% for ticket in tickets %}
+        <div class="ticket">
+            <span>Event name: {{ticket.eventName}}</span>
+            <span>Row: {{ticket.row}}</span>
+            <span>Seat Number: {{ticket.seatNum}}</span>
+            <span>Ticket Quantity: {{ticket.quantity}}</span>
+        </div>
+    {% endfor %}
+</div>
+<script src="{% static 'js/hostEvent.js' %}"></script>
+{% endblock %}

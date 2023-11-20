@@ -4,7 +4,7 @@
 {% block title %}ETicket{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/event.css' %}">
+    <link rel="stylesheet" href="{% static 'css/venue.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,13 @@
                     <option value="{{ venue.id }}">{{ venue.name }}</option>
                 {% endfor %}
             </select>
-    
+            <input
+                type="text"
+                name="ticketPrice"
+                id="ticketPrice"
+                placeholder="Price of Ticket"
+                class="textarea-input"
+            />
             <button class="btn">
                 Add Event
             </button>
@@ -38,6 +44,7 @@
         <div class="venue">
             <span>Event name: {{event.eventName}}</span>
             <span>Host: {{event.host}}</span>
+            <span>Ticket Price: {{event.ticketPrice}}</span>
         </div>
     {% endfor %}
 </div>

@@ -22,3 +22,4 @@ class Event(models.Model):
     eventName = models.CharField(max_length=50, default="")
     host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, null=True)
+    ticketPrice = models.DecimalField(max_digits=10, decimal_places=2, default=50)

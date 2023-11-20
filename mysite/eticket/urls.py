@@ -7,4 +7,5 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("venue/", views.venue, name="venue"),
     path("event/", views.hostEvent, name="event"),
+    path("ticket/", views.buyTickets, name="ticket"),
 ]   
