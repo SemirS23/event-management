@@ -35,7 +35,8 @@ def hostEvent(request):
             eventName=event_name,
             host=request.user,
             venue=venue,
-            ticketPrice = price
+            ticketPrice = price,
+            ticketQuantity = venue.capacity,
         )
         return redirect('eticket:event')
     context = {'events':events, 'venues':venues}
@@ -45,15 +46,18 @@ def buyTickets(request):
     tickets = Ticket.objects.all()
     events = Event.objects.all()
     if request.method == 'POST':
-        row = request.POST.get('row')
-        seat_num = request.POST.get('seatNum')
+        row = int(request.POST.get('row'))
+        print(row)
+        seat_num = int(request.POST.get('seatNum'))
+        print(seat_num)
         event_id = request.POST.get('event')
         event = Event.objects.get(pk=event_id)
-        ticketPrice = request.POST.get('ticketPrice')
+        quantity = request.POST.get('quantity') 
+        event.ticketQuantity -= int(quantity)
+        event.save()
         Ticket.objects.create(
             row=row, 
             seatNum = seat_num,
-            ticketPrice = ticketPrice,
             event=event
         )
         return redirect('eticket:ticket')

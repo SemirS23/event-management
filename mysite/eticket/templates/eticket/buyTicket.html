@@ -17,7 +17,9 @@
 
             <select name="event" id="event" placeholder="Select Event">
                 {% for event in events %}
+                    {% if event.ticketQuantity > 0 %}
                     <option value="{{ event.id }}">{{ event.eventName }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
                 
@@ -52,10 +54,10 @@
 <div class="ticket-wrapper" id="ticket-wrapper">
     {% for ticket in tickets %}
         <div class="ticket">
-            <span>Event name: {{ticket.eventName}}</span>
+            <!-- <span>Event name: {{ticket.eventName}}</span>
             <span>Row: {{ticket.row}}</span>
             <span>Seat Number: {{ticket.seatNum}}</span>
-            <span>Ticket Quantity: {{ticket.quantity}}</span>
+            <span>Ticket Quantity: {{ticket.quantity}}</span> -->
         </div>
     {% endfor %}
 </div>
