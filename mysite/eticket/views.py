@@ -50,6 +50,7 @@ def buyTickets(request):
         print(row)
         seat_num = int(request.POST.get('seatNum'))
         print(seat_num)
+        print(row)
         event_id = request.POST.get('event')
         event = Event.objects.get(pk=event_id)
         quantity = request.POST.get('quantity') 
