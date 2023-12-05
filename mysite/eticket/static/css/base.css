@@ -87,7 +87,7 @@
     padding: 20px 0;
     display: inline-block;
   }
-  #username {
+  #username, #balance{
     white-space: pre;
   }
   

@@ -14,6 +14,11 @@
         <form action="" method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
             <label for="eventName" class="textarea-label">Host an Event</label>
+            <select name="venue" id="venue">
+                {% for venue in venues %}
+                    <option value="{{ venue.id }}">{{ venue.name }}</option>
+                {% endfor %}
+            </select>
             <input
                 type="text"
                 name="eventName"
@@ -21,11 +26,6 @@
                 placeholder="Name of Event"
                 class="textarea-input"
             />
-            <select name="venue" id="venue">
-                {% for venue in venues %}
-                    <option value="{{ venue.id }}">{{ venue.name }}</option>
-                {% endfor %}
-            </select>
             <input
                 type="text"
                 name="ticketPrice"
@@ -39,12 +39,14 @@
         </form>
     </div>
 </div>
-<div class="event-wrapper" id="event-wrapper">
+<div class="venue-wrapper" id="venue-wrapper">
     {% for event in events %}
         <div class="venue">
             <span>Event name: {{event.eventName}}</span>
+            <span>Venue: {{event.venue.name}}, &nbsp;{{event.venue.location}}</span>
             <span>Host: {{event.host}}</span>
-            <span>Ticket Price: {{event.ticketPrice}}</span>
+            <span>Ticket Price: ${{event.ticketPrice}}</span>
+            <span>Tickets Available: {{event.ticketQuantity}}</span>
         </div>
     {% endfor %}
 </div>

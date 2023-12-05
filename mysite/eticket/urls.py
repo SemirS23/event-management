@@ -8,4 +8,6 @@ urlpatterns = [
     path("venue/", views.venue, name="venue"),
     path("event/", views.hostEvent, name="event"),
     path("ticket/", views.buyTickets, name="ticket"),
+    path("get_ticket_price/<str:event_id>/", views.getTicketPrice, name="getTicketPrice"),
+    path("get_balance/", views.getBalance, name="getBalance"),
 ]   

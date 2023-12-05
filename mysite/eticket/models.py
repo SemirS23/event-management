@@ -20,7 +20,8 @@ class Event(models.Model):
     ticketQuantity = models.PositiveIntegerField(default=0)
 
 class Ticket(models.Model):
-    id = models.IntegerField(primary_key=True),
-    row = models.SmallIntegerField(),
-    seatNum = models.SmallIntegerField(),
+    id = models.IntegerField(primary_key=True)
+    row = models.SmallIntegerField(default=0)
+    seatNum = models.SmallIntegerField(default=0)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
+    ticketHolder = models.ForeignKey(User, on_delete=models.CASCADE, null=True)

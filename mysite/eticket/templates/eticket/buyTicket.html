@@ -45,21 +45,27 @@
                 placeholder="Ticket Quantity"
                 class="textarea-input"
             />
+            <div class="total">
+                <span>TOTAL: </span> <span id="price">$0</span>
+            </div>
             <button class="btn">
                 Buy Tickets
             </button>
         </form>
     </div>
 </div>
-<div class="ticket-wrapper" id="ticket-wrapper">
+<div class="venue-wrapper" id="venue-wrapper">
     {% for ticket in tickets %}
-        <div class="ticket">
-            <!-- <span>Event name: {{ticket.eventName}}</span>
-            <span>Row: {{ticket.row}}</span>
-            <span>Seat Number: {{ticket.seatNum}}</span>
-            <span>Ticket Quantity: {{ticket.quantity}}</span> -->
+        <div class="venue">
+            <span>Event name: {{ticket.event.eventName}}</span>
+            <span>Ticket Holder: {{ticket.ticketHolder.username}}</span>
+            <span>Venue: {{ticket.event.venue.name}}, &nbsp;{{ticket.event.venue.location}}</span>
+            <div>
+                <span>Seat #: {{ticket.seatNum}}</span> 
+                <span>&nbsp;&nbsp;&nbsp;Row #: {{ticket.row}}</span> 
+            </div>
         </div>
     {% endfor %}
 </div>
-<script src="{% static 'js/hostEvent.js' %}"></script>
+<script src="{% static 'js/buyTicket.js' %}"></script>
 {% endblock %}

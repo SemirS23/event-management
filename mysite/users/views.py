@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Account
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
@@ -32,6 +33,10 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Account.objects.create(
+                user = user,
+                balance = 0
+            )
             return redirect('users:loginPage')
         else:
             messages.error(request, 'Could Not Register account')
