@@ -3,12 +3,17 @@ from django.shortcuts import redirect, render
 from .models import Venue, Event, Ticket
 from users.models import Account
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+
+@login_required
 def home(request):
     context = {}
     return render(request, "eticket/home.html", context)
 
+@login_required
 def venue(request):
     venues = Venue.objects.all()
     if request.method == 'POST':
@@ -26,6 +31,7 @@ def venue(request):
     return render(request, "eticket/venue.html", context)
 
 
+@login_required
 def hostEvent(request):
     events = Event.objects.all()
     venues = Venue.objects.all()
@@ -45,6 +51,7 @@ def hostEvent(request):
     context = {'events':events, 'venues':venues}
     return render(request, "eticket/hostEvent.html", context)
 
+@login_required
 def buyTickets(request):
     tickets = Ticket.objects.filter(ticketHolder=request.user)
     account = Account.objects.get(user=request.user)
@@ -71,12 +78,14 @@ def buyTickets(request):
     context = {'tickets':tickets, 'events':events}
     return render(request, "eticket/buyTicket.html", context)
 
+@login_required
 def getTicketPrice(request, event_id):
     event = Event.objects.get(pk=event_id)
     quantity = event.ticketPrice
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse(quantity, safe=False)
 
+@login_required
 def getBalance(request):
     account = Account.objects.get(user=request.user)
     balance = account.balance
